@@ -1,4 +1,5 @@
 function Gameboard(size) {
+    const gameArea = document.querySelector('.game-area');
 
     let boards = {
         board: [],
@@ -6,7 +7,7 @@ function Gameboard(size) {
         boardColumn: [],
         boardDiagonal: [],
     }
-
+     
     for (let i = 0; i < size * size; i++) {
         boards.board.push('');
     }
@@ -30,6 +31,12 @@ function Gameboard(size) {
         }
     }
     const newBoard = function(size) {
+        while(gameArea.firstChild) {
+            gameArea.removeChild(gameArea.lastChild)
+        }
+        gameArea.style.display = 'none';
+        this.drawBoard();
+        size = 3;
         boards.board = [];
         boards.boardColumn = [];
         boards.boardRow = [];
@@ -55,9 +62,22 @@ function Gameboard(size) {
                 boards.boardDiagonal[i].push('');
             }
         }
+        
         return boards;
     }
 
+    const drawBoard = (function() {
+        gameArea.style.display = 'grid'
+        for (let i = 0; i < 3 * 3; i++) {
+        let cell = document.createElement('div');
+        cell.setAttribute('class', 'cell');
+        cell.setAttribute('id', `${i}`);
+        gameArea.appendChild(cell);
+        }
+    });
+
+
+    // cell.addEventListener('click', ())
     const move = function(index) {
         if (boards.board[index] === '') {
             boards.board.splice(index, 1, players[0].piece);
@@ -132,7 +152,8 @@ function Gameboard(size) {
         return players;
     }
     
-    return { boards, move, players, switchPlayer, newBoard, checkForWin };
+    return { boards, move, players, switchPlayer, newBoard, checkForWin, drawBoard };
 }
 
 const board1 = Gameboard(3);
+board1.drawBoard();

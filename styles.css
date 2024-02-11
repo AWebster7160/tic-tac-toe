@@ -1,3 +1,16 @@
 body {
     background-color: darkslategray;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-area {
+    height: 66vh;
+    width: 66vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 22vw);
+}
+
+.cell {
+    border: 1px solid red;
 }
