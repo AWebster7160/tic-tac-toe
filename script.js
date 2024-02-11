@@ -2,8 +2,12 @@ function Gameboard(size) {
     const gameArea = document.querySelector('.game-area');
     const x = document.createElement('img');
     x.src = ('./img/x.svg');
+    x.setAttribute('id', 'x')
     const o = document.createElement('img');
     o.src = ('./img/o.svg');
+    o.setAttribute('id', 'o');
+    const boardCover = document.createElement('div');
+    boardCover.setAttribute('id', 'board-cover')
     let boards = {
         board: [],
         boardRow: [],
@@ -80,7 +84,7 @@ function Gameboard(size) {
     });
 
     gameArea.addEventListener('click', (e) => { 
-        index = e.target.id;
+        let index = e.target.id;
         if (e.target.firstChild) {
             return;
         } else if(players[0].piece == 'X') {
@@ -142,7 +146,7 @@ function Gameboard(size) {
         const winDiag = boards.boardDiagonal.some((line) => line.every((e) => e === line[0] && e !== ''));
         if (winRow == true || winCol == true || winDiag == true) {
             console.log('winner!');
-            grid.rem
+            gameArea.appendChild(boardCover);
         } else if (boards.board.every((e) => e !== '')) {
             console.log('tie');
         }

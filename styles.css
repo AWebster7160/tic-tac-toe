@@ -19,6 +19,15 @@ body {
     border-radius: 10px;
 }
 
+#board-cover {
+    opacity: 10%;
+    border: 1px solid red;
+    z-index: 2;
+    position: absolute;
+    height: 600px;
+    width: 600px;
+}
+
 .cell {
     border: 8px solid #838E83;
     display: flex;
@@ -50,4 +59,9 @@ body {
 }
 .cell[id='8'] {
     border-bottom-right-radius: 10px;
+}
+
+#x, #o {
+    scale: .94;
+    filter: drop-shadow(0px 0px 16px #838E83);
 }
