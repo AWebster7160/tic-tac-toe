@@ -1,26 +1,106 @@
 function Gameboard(size) {
 
-
-    let board = [];
-    for (i = 0; i < size*size; i++) {
-        board.push('');
+    let boards = {
+        board: [],
+        boardRow: [],
+        boardColumn: [],
+        boardDiagonal: [],
     }
 
-    const newBoard = function(size) {
-        let board = [''];
-        for (i = 0; i < (size*size)-1; i++) {
-            board.push('');
+    for (let i = 0; i < size * size; i++) {
+        boards.board.push('');
+    }
+
+    for (let i = 0; i < size; i++) {
+        boards.boardRow[i] = [];
+        for (let j = 0; j < size; j++) {
+            boards.boardRow[i].push('');
         }
-        return board;
+    }
+    for (let i = 0; i < size; i++) {
+        boards.boardColumn[i] = [];
+        for (let j = 0; j < size; j++) {
+            boards.boardColumn[i].push('');
+        }
+    }
+    for (let i = 0; i < size-1; i++) {
+        boards.boardDiagonal[i] = [];
+        for (let j = 0; j < size; j++) {
+            boards.boardDiagonal[i].push('');
+        }
+    }
+    const newBoard = function(size) {
+        boards.board = [];
+        boards.boardColumn = [];
+        boards.boardRow = [];
+        boards.boardDiagonal = [];
+        for (i = 0; i < (size*size); i++) {
+            boards.board.push('');
+        }
+        for (let i = 0; i < size; i++) {
+            boards.boardRow[i] = [];
+            for (let j = 0; j < size; j++) {
+                boards.boardRow[i].push('');
+            }
+        }
+        for (let i = 0; i < size; i++) {
+            boards.boardColumn[i] = [];
+            for (let j = 0; j < size; j++) {
+                boards.boardColumn[i].push('');
+            }
+        }
+        for (let i = 0; i < size-1; i++) {
+            boards.boardDiagonal[i] = [];
+            for (let j = 0; j < size; j++) {
+                boards.boardDiagonal[i].push('');
+            }
+        }
+        return boards;
     }
 
     const move = function(index) {
-        if (board[index] === '') {
-            board.splice(index, 1, players[0].piece);
+        if (boards.board[index] === '') {
+            boards.board.splice(index, 1, players[0].piece);
+            if (index == 0) {
+                boards.boardRow[0][0] = players[0].piece;
+                boards.boardColumn[0][0] = players[0].piece;
+                boards.boardDiagonal[0][0] = players[0].piece;
+            } else if (index == 1) {
+                boards.boardRow[0][1] = players[0].piece;
+                boards.boardColumn[1][0] = players[0].piece;
+            } else if (index == 2) {
+                boards.boardRow[0][2] = players[0].piece;
+                boards.boardColumn[2][0] = players[0].piece;
+                boards.boardDiagonal[1][0] = players[0].piece;
+            } else if (index == 3) {
+                boards.boardRow[1][0] = players[0].piece;
+                boards.boardColumn[0][1] = players[0].piece;
+            } else if (index == 4) {
+                boards.boardRow[1][1] = players[0].piece;
+                boards.boardColumn[1][1] = players[0].piece;
+                boards.boardDiagonal[0][1] = players[0].piece;
+                boards.boardDiagonal[1][1] = players[0].piece;
+            } else if (index == 5) {
+                boards.boardRow[1][2] = players[0].piece;
+                boards.boardColumn[2][1] = players[0].piece;
+            } else if (index == 6) {
+                boards.boardRow[2][0] = players[0].piece;
+                boards.boardColumn[0][2] = players[0].piece;
+                boards.boardDiagonal[1][2] = players[0].piece;
+            } else if (index == 7) {
+                boards.boardRow[2][1] = players[0].piece;
+                boards.boardColumn[1][2] = players[0].piece;
+            } else if (index == 8) {
+                boards.boardRow[2][2] = players[0].piece;
+                boards.boardColumn[2][2] = players[0].piece;
+                boards.boardDiagonal[0][2] = players[0].piece;
+            }
             this.switchPlayer();
-            console.log(players[0].name)
-    }}
-
+            console.log(`${players[0].name} placed an ${players[0].piece} on board[${index}]`);
+        } else {
+            console.log('Invalid move');
+        }
+    }
 
 
     let player1 = 'alex';
@@ -40,7 +120,7 @@ function Gameboard(size) {
         return players;
     }
     
-    return { board, move, players, switchPlayer, newBoard };
+    return { boards, move, players, switchPlayer, newBoard };
 }
 
 const board1 = Gameboard(3);
