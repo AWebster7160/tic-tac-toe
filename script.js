@@ -95,13 +95,25 @@ function Gameboard(size) {
                 boards.boardColumn[2][2] = players[0].piece;
                 boards.boardDiagonal[0][2] = players[0].piece;
             }
-            this.switchPlayer();
+            this.checkForWin();
             console.log(`${players[0].name} placed an ${players[0].piece} on board[${index}]`);
+            this.switchPlayer();
+            
         } else {
             console.log('Invalid move');
         }
     }
 
+    const checkForWin = function() {
+        const winRow = boards.boardRow.some((line) => line.every((e) => e === line[0] && e !== ''));
+        const winCol = boards.boardColumn.some((line) => line.every((e) => e === line[0] && e !== ''));
+        const winDiag = boards.boardDiagonal.some((line) => line.every((e) => e === line[0] && e !== ''));
+        if (winRow == true || winCol == true || winDiag == true) {
+            console.log('winner!')
+        } else if (boards.board.every((e) => e !== '')) {
+            console.log('tie');
+        }
+    }
 
     let player1 = 'alex';
     let player2 = 'opponent';
@@ -120,7 +132,7 @@ function Gameboard(size) {
         return players;
     }
     
-    return { boards, move, players, switchPlayer, newBoard };
+    return { boards, move, players, switchPlayer, newBoard, checkForWin };
 }
 
 const board1 = Gameboard(3);
