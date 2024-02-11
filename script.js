@@ -1,13 +1,16 @@
 function Gameboard(size) {
     const gameArea = document.querySelector('.game-area');
-
+    const x = document.createElement('img');
+    x.src = ('./img/x.svg');
+    const o = document.createElement('img');
+    o.src = ('./img/o.svg');
     let boards = {
         board: [],
         boardRow: [],
         boardColumn: [],
         boardDiagonal: [],
     }
-     
+    
     for (let i = 0; i < size * size; i++) {
         boards.board.push('');
     }
@@ -78,12 +81,13 @@ function Gameboard(size) {
 
     gameArea.addEventListener('click', (e) => { 
         index = e.target.id;
-        if(players[0].piece == 'X') {
-            e.target.innerText = 'X'
+        if (e.target.firstChild) {
+            return;
+        } else if(players[0].piece == 'X') {
+            e.target.appendChild(x.cloneNode(true));
         } else if (players[0].piece == 'O') {
-            e.target.innerText = 'O'
+            e.target.appendChild(o.cloneNode(true));
         }
-        
         move(index);
     })
     const move = function(index) {
@@ -137,7 +141,8 @@ function Gameboard(size) {
         const winCol = boards.boardColumn.some((line) => line.every((e) => e === line[0] && e !== ''));
         const winDiag = boards.boardDiagonal.some((line) => line.every((e) => e === line[0] && e !== ''));
         if (winRow == true || winCol == true || winDiag == true) {
-            console.log('winner!')
+            console.log('winner!');
+            grid.rem
         } else if (boards.board.every((e) => e !== '')) {
             console.log('tie');
         }

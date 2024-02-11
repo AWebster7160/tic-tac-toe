@@ -1,16 +1,53 @@
 body {
-    background-color: darkslategray;
+    background-color: #B2BCAA;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px
 }
 
 .game-area {
-    height: 66vh;
-    width: 66vw;
+    background-color: #C9CEBD;
+    height: 600px;
+    width: 600px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 22vw);
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    box-shadow: 0px 0px 16px 4px #838E83;
+    border-radius: 10px;
 }
 
 .cell {
-    border: 1px solid red;
+    border: 8px solid #838E83;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell[id='0'], .cell[id='1'], .cell[id='2'] {
+    border-top: 2px solid #838E83;
+}
+.cell[id='6'], .cell[id='7'], .cell[id='8'] {
+    border-bottom: 2px solid #838E83;
+}
+.cell[id='0'], .cell[id='3'], .cell[id='6'] {
+    border-left: 2px solid #838E83;
+}
+
+.cell[id='2'], .cell[id='5'], .cell[id='8'] {
+    border-right: 2px solid #838E83;
+}
+.cell[id='0'] {
+    border-top-left-radius: 10px;
+}
+.cell[id='2'] {
+    border-top-right-radius: 10px;
+}
+.cell[id='6'] {
+    border-bottom-left-radius: 10px;
+}
+.cell[id='8'] {
+    border-bottom-right-radius: 10px;
 }
