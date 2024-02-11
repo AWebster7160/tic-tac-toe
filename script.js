@@ -1,22 +1,30 @@
 function Gameboard(size) {
-    const board = [];
+
+
+    let board = [];
     for (i = 0; i < size*size; i++) {
         board.push('');
     }
-    const move = function(index) {
-        if (currentPlayer = '') {
-            currentPlayer = players[0];
+
+    const newBoard = function(size) {
+        let board = [''];
+        for (i = 0; i < (size*size)-1; i++) {
+            board.push('');
         }
-        if (currentPlayer === players[0]) {
+        return board;
+    }
+
+    const move = function(index) {
+        if (board[index] === '') {
             board.splice(index, 1, players[0].piece);
             this.switchPlayer();
-        } else {
-            board.splice(index, 1, players[1].piece);
-            this.switchPlayer();
-        }
-    }
-    let player1;
-    let player2;
+            console.log(players[0].name)
+    }}
+
+
+
+    let player1 = 'alex';
+    let player2 = 'opponent';
     let players = [
         {
             name: player1,
@@ -31,7 +39,8 @@ function Gameboard(size) {
         players = players.reverse()
         return players;
     }
-    return { board, move, players, switchPlayer };
+    
+    return { board, move, players, switchPlayer, newBoard };
 }
 
 const board1 = Gameboard(3);
