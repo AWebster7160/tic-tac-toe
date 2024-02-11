@@ -76,8 +76,10 @@ function Gameboard(size) {
         }
     });
 
-
-    // cell.addEventListener('click', ())
+    gameArea.addEventListener('click', (e) => { 
+        index = e.target.id;
+        move(index);
+    })
     const move = function(index) {
         if (boards.board[index] === '') {
             boards.board.splice(index, 1, players[0].piece);
@@ -115,9 +117,9 @@ function Gameboard(size) {
                 boards.boardColumn[2][2] = players[0].piece;
                 boards.boardDiagonal[0][2] = players[0].piece;
             }
-            this.checkForWin();
+            checkForWin();
             console.log(`${players[0].name} placed an ${players[0].piece} on board[${index}]`);
-            this.switchPlayer();
+            switchPlayer();
             
         } else {
             console.log('Invalid move');
@@ -152,7 +154,7 @@ function Gameboard(size) {
         return players;
     }
     
-    return { boards, move, players, switchPlayer, newBoard, checkForWin, drawBoard };
+    return { boards, move, players, switchPlayer, newBoard, checkForWin, drawBoard, gameArea };
 }
 
 const board1 = Gameboard(3);
