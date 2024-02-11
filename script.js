@@ -78,6 +78,12 @@ function Gameboard(size) {
 
     gameArea.addEventListener('click', (e) => { 
         index = e.target.id;
+        if(players[0].piece == 'X') {
+            e.target.innerText = 'X'
+        } else if (players[0].piece == 'O') {
+            e.target.innerText = 'O'
+        }
+        
         move(index);
     })
     const move = function(index) {
