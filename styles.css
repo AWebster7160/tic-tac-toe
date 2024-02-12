@@ -5,9 +5,26 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0px;
-    padding: 0px
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+.game-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.game-info #icon {
+    height: 40px;
+    margin-left: 10px;
+}
+
+.game-info h1 {
+    margin-right: 80px;
+}
 .game-area {
     background-color: #C9CEBD;
     height: 600px;
@@ -20,8 +37,7 @@ body {
 }
 
 #board-cover {
-    opacity: 10%;
-    border: 1px solid red;
+    opacity: 0%;
     z-index: 2;
     position: absolute;
     height: 600px;

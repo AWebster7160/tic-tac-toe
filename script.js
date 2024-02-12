@@ -1,5 +1,9 @@
 function Gameboard(size) {
     const gameArea = document.querySelector('.game-area');
+    const gameInfo = document.querySelector('.game-info');
+    let icon = document.createElement('img');
+    icon.src = ('./img/x.svg');
+    icon.setAttribute('id', 'icon');
     const x = document.createElement('img');
     x.src = ('./img/x.svg');
     x.setAttribute('id', 'x')
@@ -7,7 +11,8 @@ function Gameboard(size) {
     o.src = ('./img/o.svg');
     o.setAttribute('id', 'o');
     const boardCover = document.createElement('div');
-    boardCover.setAttribute('id', 'board-cover')
+    boardCover.setAttribute('id', 'board-cover');
+    gameInfo.appendChild(icon);
     let boards = {
         board: [],
         boardRow: [],
@@ -85,14 +90,18 @@ function Gameboard(size) {
 
     gameArea.addEventListener('click', (e) => { 
         let index = e.target.id;
-        if (e.target.firstChild) {
-            return;
-        } else if(players[0].piece == 'X') {
-            e.target.appendChild(x.cloneNode(true));
-        } else if (players[0].piece == 'O') {
-            e.target.appendChild(o.cloneNode(true));
-        }
         move(index);
+        if (e.target.firstChild) {
+            console.log('error')
+            return;
+        } else if(players[0].piece == 'O') {
+            e.target.appendChild(x.cloneNode(true));
+            showPiece();
+        } else if (players[0].piece == 'X') {
+            e.target.appendChild(o.cloneNode(true));
+            showPiece();
+        }
+        
     })
     const move = function(index) {
         if (boards.board[index] === '') {
@@ -164,11 +173,19 @@ function Gameboard(size) {
             piece: 'O'
         }
     ];
+
     const switchPlayer = function() { 
         players = players.reverse()
         return players;
     }
     
+    const showPiece = function() {
+        if (players[0].piece == 'X') {
+            icon.src = ('./img/o.svg');
+        } else if (players[0].piece == 'O')
+            icon.src = ('./img/x.svg');
+    }
+
     return { boards, move, players, switchPlayer, newBoard, checkForWin, drawBoard, gameArea };
 }
 
