@@ -10,20 +10,42 @@ body {
 }
 
 .game-info {
+    position: relative;
     display: flex;
+    max-width: 600px;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
 .game-info #icon {
+    position: relative;
     height: 40px;
-    margin-left: 10px;
 }
 
 .game-info h1 {
-    margin-right: 80px;
+    position: relative;
+    margin-right: 180px;
+    min-width: 200px;
+}
+
+.game-info h2 {
+    position: relative;
+    min-width: 180px;
+    text-align: end;
+    margin-right: 8px;
+}
+
+.replay {
+    position: absolute;
+    border-radius: 10px;
+    height: 40px;
+    width: 120px;
+    background-color: #838E83;
+    margin-top: -610px;
+    font-weight: bold;
+    font-size: 18px;
 }
 .game-area {
     background-color: #C9CEBD;

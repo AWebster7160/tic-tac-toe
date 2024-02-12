@@ -1,6 +1,11 @@
 function Gameboard(size) {
     const gameArea = document.querySelector('.game-area');
     const gameInfo = document.querySelector('.game-info');
+    const playerInfo = document.querySelector('.current-player');
+    const replay = document.createElement('button');
+    replay.setAttribute('class', 'replay');
+    const body = document.querySelector('body');
+    replay.textContent = 'Play Again?';
     let icon = document.createElement('img');
     icon.src = ('./img/x.svg');
     icon.setAttribute('id', 'icon');
@@ -42,12 +47,13 @@ function Gameboard(size) {
             boards.boardDiagonal[i].push('');
         }
     }
+
     const newBoard = function(size) {
         while(gameArea.firstChild) {
             gameArea.removeChild(gameArea.lastChild)
         }
         gameArea.style.display = 'none';
-        this.drawBoard();
+        drawBoard();
         size = 3;
         boards.board = [];
         boards.boardColumn = [];
@@ -74,10 +80,18 @@ function Gameboard(size) {
                 boards.boardDiagonal[i].push('');
             }
         }
-        
+        playerInfo.innerText = "Current Player:";
         return boards;
     }
-
+    replay.addEventListener('click', () => {
+            newBoard(3);
+            replay.style.display = 'none'
+            icon.style.display = 'revert';
+            icon.src = ('./img/x.svg');
+            if (players[0].piece == 'O') {
+                players.reverse();
+            }
+        })
     const drawBoard = (function() {
         gameArea.style.display = 'grid'
         for (let i = 0; i < 3 * 3; i++) {
@@ -155,9 +169,17 @@ function Gameboard(size) {
         const winDiag = boards.boardDiagonal.some((line) => line.every((e) => e === line[0] && e !== ''));
         if (winRow == true || winCol == true || winDiag == true) {
             console.log('winner!');
+            playerInfo.innerText = 'Winner:'
+            body.insertBefore(replay, gameArea);
+            replay.style.display = 'revert';
             gameArea.appendChild(boardCover);
         } else if (boards.board.every((e) => e !== '')) {
             console.log('tie');
+            playerInfo.innerText = 'Tie!';
+            replay.style.display = 'revert';
+            icon.style.display = 'none';
+            body.insertBefore(replay, gameArea);
+            gameArea.appendChild(boardCover);
         }
     }
 
