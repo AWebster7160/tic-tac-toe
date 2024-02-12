@@ -18,6 +18,7 @@ function Gameboard(size) {
     const boardCover = document.createElement('div');
     boardCover.setAttribute('id', 'board-cover');
     gameInfo.appendChild(icon);
+
     let boards = {
         board: [],
         boardRow: [],
@@ -28,7 +29,6 @@ function Gameboard(size) {
     for (let i = 0; i < size * size; i++) {
         boards.board.push('');
     }
-
     for (let i = 0; i < size; i++) {
         boards.boardRow[i] = [];
         for (let j = 0; j < size; j++) {
@@ -115,8 +115,8 @@ function Gameboard(size) {
             e.target.appendChild(o.cloneNode(true));
             showPiece();
         }
-        
     })
+
     const move = function(index) {
         if (boards.board[index] === '') {
             boards.board.splice(index, 1, players[0].piece);
@@ -157,7 +157,6 @@ function Gameboard(size) {
             checkForWin();
             console.log(`${players[0].name} placed an ${players[0].piece} on board[${index}]`);
             switchPlayer();
-            
         } else {
             console.log('Invalid move');
         }
